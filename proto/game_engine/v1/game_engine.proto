@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package game_engine.v1;
+option go_package = "./game_engine";
+
+import "google/protobuf/timestamp.proto";
+
+
+// All of the cards that are generated for a Game
+message Pool {
+  repeated Card cards = 1;
+  // ID of the game
+  string game_id = 2;
+}
+
+// Subset of Cards from a Pool played during a Game
+message Hand {
+  repeated Card cards = 1;
+  // ID of the game
+  string game_id = 2;
+}
+
+message Card {
+  // The value of the card
+  string value = 1;
+  // The type of the card (number, operator, special)
+  CardType type = 2;
+}
+
+enum CardType {
+  // Default zero value
+  CARD_TYPE_UNSPECIFIED = 0;
+  // Number card
+  CARD_TYPE_NUMBER = 1;
+  // Operator card
+  CARD_TYPE_OPERATOR = 2;
+  // Special card
+  CARD_TYPE_SPECIAL = 3;
+}
+
+message Game {
+  // Id of the game
+  string id = 1;
+  // Timestamp of game creation
+  google.protobuf.Timestamp timestamp = 2;
+  // The pool for this game
+  Pool pool = 3;
+}
+
+// GetGame gets today's game. An optional user_id is submitted 
+// when a user is logged in for validation
+message GetGameRequest {
+  // Timestamp of game creation
+  google.protobuf.Timestamp timestamp = 1;
+  // (optional) User's UUID
+  string user_id = 2;  
+}
+
+message GetGameResponse {
+  Game game = 1;
+}
+
+// PlayHandRequest plays a Hand
+message PlayHandRequest {
+  // ID of the game
+  string game_id = 1;
+  // Timestamp of hand submission
+  google.protobuf.Timestamp timestamp = 2;
+  // Hand played
+  Hand hand = 3;
+  // Seconds elapsed since game start
+  float secs_elapsed = 4;
+}
+
+// Response from a PlayHandRequest
+message PlayHandResponse {
+  repeated int32 play_order = 1;
+  repeated float score_counter = 2;
+}
+
+service GameEngineService {
+  rpc GetGame(GetGameRequest) returns (GetGameResponse) {}
+  rpc PlayHand(PlayHandRequest) returns (PlayHandResponse) {}
+}
