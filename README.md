@@ -7,7 +7,6 @@ Repo for hi-low mini (personal project)
 Generate protos
 ```
 buf generate
-
 <!-- to install refer to https://connectrpc.com/docs/go/getting-started -->
 ```
 
