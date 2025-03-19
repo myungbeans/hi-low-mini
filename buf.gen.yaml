@@ -2,10 +2,13 @@ version: v2
 clean: true
 plugins:
   - local: protoc-gen-es
-    out: gen/js
+    out: frontend/gen
     # Also generate any imported dependencies
     include_imports: true
     opt: target=js
   - local: protoc-gen-go
-    out: gen/go
+    out: backend/gen
     opt: paths=source_relative
+  - local: protoc-gen-connect-go
+    out: backend/gen
+    opt: package_suffix

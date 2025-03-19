@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package game_engine.v1;
-option go_package = "./game_engine";
+option go_package = "game_engine/v1";
 
 import "google/protobuf/timestamp.proto";
 
