@@ -20,3 +20,20 @@ Install JS dependencies
 go mod tidy
 go mod vendor
 ```
+
+#### Running locally
+
+Start up the server by running
+```
+go run ./backend/cmd/server/main.go
+```
+
+You can send curl requests to test. 
+E.g.
+```
+curl \
+    --header "Content-Type: application/json" \
+    --data '{}' \
+    http://localhost:8080/game_engine.v1.GameEngineService/GetGame
+{"game":{"id":"000", "timestamp":"2025-03-19T18:47:11.624953Z", "pool":{"cards":[{"value":"1", "type":"CARD_TYPE_NUMBER"}]}}}
+```

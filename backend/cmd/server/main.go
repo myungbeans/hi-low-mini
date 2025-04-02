@@ -56,6 +56,8 @@ func main() {
 	mux := http.NewServeMux()
 	path, handler := pb.NewGameEngineServiceHandler(server)
 	mux.Handle(path, handler)
+	mux.Handle("/api/", http.StripPrefix("/api", mux))
+	log.Println("Server listening on :8080")
 	http.ListenAndServe(
 		"localhost:8080",
 		// Use h2c so we can serve HTTP/2 without TLS.
