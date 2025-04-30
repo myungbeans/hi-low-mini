@@ -1,6 +1,7 @@
 # hi-low-mini
 Repo for hi-low mini (personal project)
 
+![wireframe](./imgs/Hi-Low%20Mini%20wireframe.svg)
 
 ## Setup
 #### For all:
@@ -13,7 +14,6 @@ buf generate
 
 #### Frontend:
 Install JS dependencies
-
 
 #### Backend:
 ```
@@ -35,5 +35,9 @@ curl \
     --header "Content-Type: application/json" \
     --data '{}' \
     http://localhost:8080/game_engine.v1.GameEngineService/GetGame
+```
+
+returns
+```
 {"game":{"id":"000", "timestamp":"2025-03-19T18:47:11.624953Z", "pool":{"cards":[{"value":"1", "type":"CARD_TYPE_NUMBER"}]}}}
 ```
