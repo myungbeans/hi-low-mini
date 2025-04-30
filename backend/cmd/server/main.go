@@ -11,6 +11,7 @@ import (
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	pb "hi_low_mini/gen/game_engine/v1"
+	"hi_low_mini/runtime/engine"
 )
 
 type GameEngineServer struct{}
@@ -43,11 +44,26 @@ func (s *GameEngineServer) PlayHand(
 	req *connect.Request[pb.PlayHandRequest],
 ) (*connect.Response[pb.PlayHandResponse], error) {
 	log.Println("Request headers: ", req.Header())
+
+	// Hands are pre-validated:
+	// Starts with a number, followed by an operator, end with a number, has 7 cards
+	// e.g. ["1","+","2","*","3","/","4"]
+	cards := req.Msg.GetHand().GetCards()
+	scores := []float32{}
+
+	scores, err := engine.Calculate(cards, scores)
+	if err != nil {
+		return nil, err
+	}
+
 	res := connect.NewResponse(&pb.PlayHandResponse{
-		PlayOrder:    []int32{},
-		ScoreCounter: []float32{},
+		ScoreCounter: scores,
 	})
+
+	// TODO: consider additional headers needed
+	// (if this were work, I would create a ticket and paste the ticket num here track work)
 	res.Header().Set("Version", "v1")
+
 	return res, nil
 }
 
