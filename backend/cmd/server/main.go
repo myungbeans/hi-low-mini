@@ -16,6 +16,7 @@ import (
 
 type GameEngineServer struct{}
 
+// TODO: needs to be implemented - returns a stub Game with 1 Card in the Pool for local testing
 func (s *GameEngineServer) GetGame(
 	ctx context.Context,
 	req *connect.Request[pb.GetGameRequest],
