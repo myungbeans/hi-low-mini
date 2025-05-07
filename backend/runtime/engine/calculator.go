@@ -9,10 +9,6 @@ import (
 	"hi_low_mini/runtime/utils"
 )
 
-// Fixed number of operations allowed in a Hand
-const countExpectedOps = 3
-const countExpectedNums = 4
-
 // Calculate reduces `cards` by running operations on (a, b), storing the result of each step in `scores`
 func Calculate(cards []*pb.Card, scores []float32) ([]float32, error) {
 	if len(scores) == countExpectedOps {
@@ -47,18 +43,18 @@ func runOperation(strA, strB, operator string) (float32, error) {
 	}
 
 	switch operator {
-	case "+":
+	case models.OP_ADD:
 		return a + b, nil
-	case "-":
+	case models.OP_SUBTRACT:
 		return a - b, nil
-	case "*":
+	case models.OP_MULTIPLY:
 		return a * b, nil
-	case "/":
+	case models.OP_DIVIDE:
 		if b == float32(0) {
 			return 0.0, fmt.Errorf("operation %v %v %s is not valid. Division by 0 is not allowed", a, b, operator)
 		}
 		return a / b, nil
-	case "^":
+	case models.OP_POWER:
 		powBase := math.Pow(float64(a), float64(b))
 		return float32(powBase), nil
 	default:

@@ -8,33 +8,20 @@ import (
 	"connectrpc.com/connect"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
-	"google.golang.org/protobuf/types/known/timestamppb"
 
 	pb "hi_low_mini/gen/game_engine/v1"
 	"hi_low_mini/runtime/engine"
+	"hi_low_mini/runtime/models"
 )
 
 type GameEngineServer struct{}
 
-// TODO: needs to be implemented - returns a stub Game with 1 Card in the Pool for local testing
 func (s *GameEngineServer) GetGame(
 	ctx context.Context,
 	req *connect.Request[pb.GetGameRequest],
 ) (*connect.Response[pb.GetGameResponse], error) {
-	log.Println("Request headers: ", req.Header())
 	res := connect.NewResponse(&pb.GetGameResponse{
-		Game: &pb.Game{
-			Id:        "000",
-			Timestamp: timestamppb.Now(),
-			Pool: &pb.Pool{
-				Cards: []*pb.Card{
-					&pb.Card{
-						Value: "1",
-						Type:  pb.CardType_CARD_TYPE_NUMBER,
-					},
-				},
-			},
-		},
+		Game: models.NewGame(engine.NewSet()),
 	})
 	res.Header().Set("Version", "v1")
 	return res, nil
