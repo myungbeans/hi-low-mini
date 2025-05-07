@@ -40,5 +40,5 @@ curl \
 
 returns
 ```
-{"game":{"id":"000", "timestamp":"2025-03-19T18:47:11.624953Z", "pool":{"cards":[{"value":"1", "type":"CARD_TYPE_NUMBER"}]}}}
+{"game":{"id":"1234-uuid-abc-xyz", "timestamp":"2025-03-19T18:47:11.624953Z", "pool":{"cards":[{"value":"1", "type":"CARD_TYPE_NUMBER"}...]}}}
 ```
