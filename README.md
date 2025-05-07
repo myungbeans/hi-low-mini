@@ -1,5 +1,6 @@
 # hi-low-mini
-Repo for hi-low mini (personal project)
+(WORK IN PROGRESS)
+A daily webapp minigame. Like wordle but with math
 
 ![wireframe](./imgs/Hi-Low%20Mini%20wireframe.svg)
 
