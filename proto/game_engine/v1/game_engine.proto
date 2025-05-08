@@ -60,6 +60,17 @@ message GetGameResponse {
   Game game = 1;
 }
 
+// GenerateGame generates a new game.
+// TODO: add validation to only allow admin service accs to generate a new game?
+message GenerateGameRequest {
+  // TODO: add validation to only allow admin service accs to generate a new game?
+  bool dry_run = 1;
+}
+
+message GenerateGameResponse {
+  Game game = 1;
+}
+
 // PlayHandRequest plays a Hand
 message PlayHandRequest {
   // ID of the game
@@ -80,5 +91,6 @@ message PlayHandResponse {
 
 service GameEngineService {
   rpc GetGame(GetGameRequest) returns (GetGameResponse) {}
+  rpc GenerateGame(GenerateGameRequest) returns (GenerateGameResponse) {}
   rpc PlayHand(PlayHandRequest) returns (PlayHandResponse) {}
 }

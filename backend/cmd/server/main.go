@@ -16,11 +16,23 @@ import (
 
 type GameEngineServer struct{}
 
+// TODO: this should read from db to fetch today's game instead of generating a new one
 func (s *GameEngineServer) GetGame(
 	ctx context.Context,
 	req *connect.Request[pb.GetGameRequest],
 ) (*connect.Response[pb.GetGameResponse], error) {
 	res := connect.NewResponse(&pb.GetGameResponse{
+		Game: models.NewGame(engine.NewSet()),
+	})
+	res.Header().Set("Version", "v1")
+	return res, nil
+}
+
+func (s *GameEngineServer) GenerateGame(
+	ctx context.Context,
+	req *connect.Request[pb.GenerateGameRequest],
+) (*connect.Response[pb.GenerateGameResponse], error) {
+	res := connect.NewResponse(&pb.GenerateGameResponse{
 		Game: models.NewGame(engine.NewSet()),
 	})
 	res.Header().Set("Version", "v1")
