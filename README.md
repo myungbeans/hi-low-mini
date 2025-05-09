@@ -4,25 +4,24 @@ A daily webapp minigame. Like wordle but with math
 
 ![wireframe](./imgs/Hi-Low%20Mini%20wireframe.svg)
 
-## Setup
-#### For all:
+## Protos
 Generate protos
 ```
-buf generate
-<!-- to install refer to https://connectrpc.com/docs/go/getting-started -->
+npx buf generate
+<!-- to install refer to https://connectrpc.com/docs/web/generating-code/ -->
 ```
 
-
-#### Frontend:
+# Frontend:
 Install JS dependencies
 
-#### Backend:
+# Backend:
+## Setup:
 ```
 go mod tidy
 go mod vendor
 ```
 
-#### Running locally
+## Running locally
 
 Start up the server by running
 ```
