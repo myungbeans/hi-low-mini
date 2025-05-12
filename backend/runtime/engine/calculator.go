@@ -15,6 +15,14 @@ func Calculate(cards []*pb.Card, scores []float32) ([]float32, error) {
 		return scores, nil
 	}
 
+	if len(scores) == 0 {
+		firstNum, err := utils.StrToFloat(cards[0].GetValue())
+		if err != nil {
+			return nil, fmt.Errorf("failed to convert first number: %v", err)
+		}
+		scores = append(scores, firstNum)
+	}
+
 	res, err := runOperation(cards[0].GetValue(), cards[2].GetValue(), cards[1].GetValue())
 	if err != nil {
 		return nil, err
