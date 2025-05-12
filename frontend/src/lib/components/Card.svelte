@@ -14,7 +14,7 @@
 </script>
 
 <button
-  class="w-16 h-24 rounded-lg shadow-md transition-all duration-200 flex items-center justify-center text-xl font-bold"
+  class="w-12 h-20 rounded-lg shadow-md transition-all duration-200 flex items-center justify-center text-lg font-bold"
   class:bg-primary={isSelected}
   class:bg-secondary={isOperator && !isSelected}
   class:text-white={isSelected || (isOperator && !isSelected)}

@@ -38,7 +38,7 @@ export const POST: RequestHandler = async ({ request }) => {
     
     return json({
       playOrder: response.playOrder,
-      scoreCounter: response.scoreCounter
+      scoreCounter: response.scoreCounter.map(score => Number(score))
     });
   } catch (error: any) {
     return new Response(JSON.stringify({ 
