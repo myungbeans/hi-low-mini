@@ -13,7 +13,7 @@
 
 <div class="bg-white rounded-lg p-4 shadow-lg">
   <div class="text-center">
-    <h2 class="text-2xl font-bold text-primary">Current Score</h2>
+    <h2 class="text-2xl font-bold text-primary">Total</h2>
     <p class={vibrateClass}>{formatNumber(currentScore)}</p>
   </div>
 </div>
