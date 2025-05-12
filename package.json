@@ -1,10 +1,23 @@
 {
+  "name": "hi-low-mini",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend"
+  },
   "dependencies": {
-    "@bufbuild/protobuf": "^2.2.5",
-    "@connectrpc/connect": "^2.0.2"
+    "@bufbuild/protobuf": "^2.4.0",
+    "@connectrpc/connect": "^2.0.2",
+    "@connectrpc/connect-web": "^2.0.2",
+    "@sveltejs/adapter-auto": "^6.0.0",
+    "@sveltejs/kit": "^2.20.8",
+    "svelte": "^5.28.2",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@bufbuild/buf": "^1.53.0",
-    "@bufbuild/protoc-gen-es": "^2.2.5"
+    "@bufbuild/protoc-gen-es": "^2.4.0",
+    "@types/node": "22.15.17"
   }
 }
