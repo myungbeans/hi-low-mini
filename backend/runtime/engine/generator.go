@@ -19,10 +19,16 @@ func randomOperator() string {
 }
 
 func GenerateNumCards(n int64) []*pb.Card {
+	tmp := map[float32]float32{}
 	cards := []*pb.Card{}
 
 	for _ = range n {
-		cards = append(cards, models.NewNumCard(randomNum()))
+		num := randomNum()
+		// Reroll on dupes - still possible to get dupes, but more unlikely
+		if _, ok := tmp[num]; ok {
+			num = randomNum()
+		}
+		cards = append(cards, models.NewNumCard(num))
 	}
 	return cards
 }
