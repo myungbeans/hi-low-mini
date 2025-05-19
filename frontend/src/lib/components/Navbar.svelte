@@ -2,9 +2,17 @@
   import { browser } from '$app/environment';
   import { fade } from 'svelte/transition';
   import { darkMode } from '$lib/stores/theme';
+  import { clearGameCache } from '$lib/stores/game';
   
   let showInstructions = false;
   let showSettings = false;
+  let showClearCacheConfirm = false;
+
+  function handleClearCache() {
+    clearGameCache();
+    showClearCacheConfirm = false;
+    showSettings = false;
+  }
 </script>
 
 {#if browser}
@@ -50,12 +58,44 @@
                 </span>
               </button>
             </div>
+            <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+              <button 
+                class="w-full px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+                on:click={() => showClearCacheConfirm = true}>
+                Clear Cached Data
+              </button>
+            </div>
           </div>
           <button 
             class="mt-4 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors dark:text-white"
             on:click={() => showSettings = false}>
             Close
           </button>
+        </div>
+      </div>
+    {/if}
+
+    {#if showClearCacheConfirm}
+      <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" 
+           on:click|self={() => showClearCacheConfirm = false}
+           transition:fade>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg max-w-md w-full mx-4">
+          <h2 class="text-xl font-bold mb-4 dark:text-white">Clear Cache</h2>
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            Are you sure you want to clear all cached data? This will reset your current game and you'll need to fetch a new one.
+          </p>
+          <div class="flex space-x-4">
+            <button 
+              class="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              on:click={handleClearCache}>
+              Clear
+            </button>
+            <button 
+              class="flex-1 px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors dark:text-white"
+              on:click={() => showClearCacheConfirm = false}>
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     {/if}
